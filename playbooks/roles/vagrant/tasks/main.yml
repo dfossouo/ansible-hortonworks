@@ -1,0 +1,38 @@
+---
+
+- name: Install VirtualBox Dependencies
+  package:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items: "{{ virtualbox_dependencies }}"
+
+- name: Download VirtualBox repo file
+  get_url:
+    url: http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+    dest: /etc/yum.repos.d/virtualbox.repo
+    mode: 0440
+
+- name: Install VirtualBox
+  package:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items: "{{ virtualbox_package_version }}"
+  notify: Setup VirtualBox
+
+- name: Download Vagrant RPM 
+  get_url: 
+    url: https://releases.hashicorp.com/vagrant/2.2.3/vagrant_2.2.3_x86_64.rpm
+    dest: /tmp
+    mode: 0440
+
+- name: Install Vagrant RPM 
+  yum:
+    name: /tmp/vagrant_2.2.3_x86_64.rpm
+    state: present
+
+- file:
+    path: /home/vagrant
+    state: directory
+    mode: 0755

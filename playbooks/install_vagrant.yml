@@ -1,0 +1,8 @@
+---
+
+- name: Install Vagrant on CentOS 7
+  hosts: localhost
+  any_errors_fatal: true
+  become: yes
+  roles:
+    - vagrant

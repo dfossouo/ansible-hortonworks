@@ -1,0 +1,15 @@
+---
+virtualbox_dependencies:
+	- gcc 
+	- dkms
+	- make 
+	- qt 
+	- libgomp 
+	- patch
+	- kernel-headers 
+	- kernel-devel 
+	- binutils 
+	- glibc-headers 
+	- glibc-devel 
+	- font-forge
+virtualbox_package_version: VirtualBox-5.1
